@@ -1,0 +1,17 @@
+{
+  "backend": "siglip",
+  "model": "google/siglip-base-patch16-224",
+  "pretrained": null,
+  "prompt_template": null,
+  "device": "cuda",
+  "dim": 768,
+  "max_elements": 5,
+  "num_indexed": 5,
+  "skipped": 0,
+  "hnsw": {
+    "space": "cosine",
+    "ef_construction": 200,
+    "M": 16,
+    "ef_search": 64
+  }
+}
