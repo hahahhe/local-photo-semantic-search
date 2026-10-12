@@ -66,6 +66,8 @@ searcher.py
 |
 사진 분석 / 인덱싱 - 스레드 필수
 |
+| *Index 저장 위치
+|
 검색창 활성화
 |
 "query"
@@ -73,3 +75,16 @@ searcher.py
 검색 결과(사진 썸네일)
 |
 사진 열기
+
+
+*Index 저장 위치
+AppData/
+|
+| LocalPhotoSearch/
+  |
+  | settings.json
+  | index/
+    |
+    | index_hnsw.bin
+    | paths.json
+    | meta.json

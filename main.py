@@ -1,26 +1,31 @@
 from pathlib import Path
 
-from src.searcher import (
-    search,
-    SearchConfig
+from src.searcher import SearchEngine
+
+
+engine = SearchEngine(
+    Path("index_test")
 )
 
 
-cfg = SearchConfig(
-    k=3,
-    open_top=0
-)
+while True:
 
-results = search(
-    out_dir=Path("index_test"),
-    query="울타리",
-    cfg=cfg
-)
-
-
-for rank, similarity, path in results:
-    print(
-        rank,
-        similarity,
-        path
+    query = input(
+        "\n검색어: "
     )
+
+    if query == "exit":
+        break
+
+    results = engine.search(
+        query=query,
+        k=3
+    )
+
+    for result in results:
+
+        print(
+            result.rank,
+            f"{result.similarity:.4f}",
+            result.path
+        )

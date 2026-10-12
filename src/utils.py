@@ -24,6 +24,10 @@ def collect_images(img_dir: Path, recrusive: bool = True) -> List[Path]:
     for p in paths_pre:
         if not p.is_file():
             continue
+
+        if p.name.startswith("._"):
+            continue
+        
         if p.suffix.lower() not in IMG_EXTS:
             continue
         paths.append(p)

@@ -4,14 +4,28 @@ from pathlib import Path
 from PySide6.QtCore import QStandardPaths
 
 
-def get_settings_path() -> Path:
+def get_app_data_dir() -> Path:
     app_data_dir = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
 
-    settings_dir = Path(app_data_dir)
+    path = Path(app_data_dir)
 
-    settings_dir.mkdir(parents=True, exist_ok=True)
+    path.mkdir(parents=True, exist_ok=True)
 
-    return settings_dir / "settings.json"
+    return path
+
+
+def get_settings_path() -> Path:
+
+    return (get_app_data_dir() / "settings.json")
+
+
+def get_index_dir() -> Path:
+
+    index_dir = (get_app_data_dir() / "index")
+
+    index_dir.mkdir(parents=True, exist_ok=True)
+
+    return index_dir
 
 
 def save_library_root(library_root: Path) -> None:
@@ -47,3 +61,4 @@ def load_library_root() -> Path | None:
 
     except (json.JSONDecodeError, OSError):
         return None
+

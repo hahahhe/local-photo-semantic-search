@@ -195,7 +195,7 @@ def make_embedder(
         backend: str, 
         device: torch.device, 
         model: str, 
-        pretrained: str,
+        pretrained: str = "openai",
         prompt_template: Optional[str] = None,
 ) -> EmbedderBase:
     backend = backend.lower()
