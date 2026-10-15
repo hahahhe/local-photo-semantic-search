@@ -7,7 +7,6 @@ import hnswlib
 import numpy as np
 from PIL import Image
 from tqdm import tqdm
-from datetime import datetime
 
 from .embedders import get_device, make_embedder
 from .utils import collect_images, cpu_thread
@@ -76,11 +75,7 @@ def build_index(
             header = None
 
         record = {
-            "timestamp": datetime.now().isoformat(),
             "path": str(path),
-            "extension": path.suffix.lower(),
-            "file_size": file_size,
-            "header_hex": header,
             "error_type": type(error).__name__,
             "reason": str(error),
         }

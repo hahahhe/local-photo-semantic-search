@@ -144,53 +144,6 @@ class SigLIPEmbedder(EmbedderBase):
             .astype("float32")
         )
 
-class SigLIPEmbedder1():
-    def __init__(self, device: torch.device, cfg: SigLIPConfig):
-        from transformers import AutoProcessor, AutoModel
-    
-        self.device = device
-        self.cfg = cfg
-
-        self.processor = AutoProcessor.from_pretrained(cfg.model_id)
-        self.model = AutoModel.from_pretrained(cfg.model_id).to(device).eval()
-
-        self.dim = int(self.encode_texts(["dim probe"]).shape[1])
-
-    def _apply_template(self, t: str) -> str:
-        if not self.cfg.prompt_template:
-            return t
-        return self.cfg.prompt_template.format(text=t)
-    
-    @torch.no_grad()
-    def encode_images(self, pil_images: List[Image.Image]) -> np.ndarray:
-        texts = [""]*len(pil_images)
-
-        inputs = self.processor(
-            text=texts, 
-            return_tensors="pt",
-        ).to(self.device)
-
-        outputs = self.model(**inputs)
-        img = outputs.image_embeds 
-        img = l2_normalize(img).detach().cpu().numpy().astype("float32")
-
-        return img
-
-    @torch.no_grad()
-    def encode_texts(self, texts: List[str]) -> np.ndarray:
-        texts = [self._apply_template(t) for t in texts]
-
-        inputs = self.processor(
-            text=texts, 
-            return_tensors="pt",
-        ).to(self.device)
-
-        outputs = self.model(**inputs)
-        txt = outputs.text_embeds
-        txt = l2_normalize(txt).detach().cpu().numpy().astype("float32")
-
-        return txt
-
 def make_embedder(
         backend: str, 
         device: torch.device, 

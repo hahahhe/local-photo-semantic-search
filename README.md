@@ -34,11 +34,18 @@ local-photo-semantic-search/
 │  ├─ 01_requirements.md
 │  ├─ 02_design.md
 ├─ src/
+|  ├─ gui/
+|  |  ├─ main_window.py
+|  |  └─ workers.py
 │  ├─ cli.py
 │  ├─ indexer.py
 │  ├─ searcher.py
 │  ├─ embedders.py
+|  ├─ image_io.py
+|  ├─ index_status.py
+|  ├─ library_store.py
 │  └─ utils.py
+|
 ├─ scripts/
 ├─ data/
 │  ├─ samples/

@@ -16,7 +16,6 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QVBoxLayout,
     QWidget,
-    QListWidget,
     QListWidgetItem
 )
 from PySide6.QtGui import (
@@ -321,6 +320,7 @@ class MainWindow(QMainWindow):
                 f"인덱싱된 사진: "
                 f"{status.indexed_count:,}장"
             )
+            self.start_search_thread()
         else:
             self.index_status_label.setText(status.message)
 
